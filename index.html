@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Hra na pamet</title>
-</head>
-<body>
-    <div class="game-board">
-        <!-- Карты будут генерироваться здесь -->
-    </div>
-    <div class="stat-bar">
-            <p class="time">Čas: <span><b>0</b>s</span></p>
-            <p class="flips">Převraty: <span><b>0</b></span></p>
-            <button>Nová hra</button>
-    </div>
-    <div class="win-screen hidden">
-    <div class="win-box">
-        <h2>Vítězství!</h2>
-        <p class="current-score">Score: <b>0</b></p>
-        <p class="best-score">High Score: <b>0</b></p>
-        <button>Nová hra</button>
-    </div>
-</div>
-    <script src="script.js"></script>
-</body>
+<html lang="cz">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Hra na pamet</title>
+    </head>
+    <body>
+        <!--Deska s kartičkami -->
+        <div class="game-board">
+            <!-- Místo pro karty -->
+        </div>
+
+        <!-- Blok se statistikami hry -->
+        <div class="stat-bar">
+                <p class="time">Čas: <span><b>0</b>s</span></p>
+                <p class="flips">Převraty: <span><b>0</b></span></p>
+                <button>Nová hra</button>
+        </div>
+        
+        <!-- Vítězné okno -->
+        <div class="win-screen hidden">
+            <div class="win-box">
+                <h2>Vítězství!</h2>
+                <p class="current-score">Score: <b>0</b></p>
+                <p class="best-score">High Score: <b>0</b></p>
+                <button>Nová hra</button>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
 </html>
