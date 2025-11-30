@@ -28,6 +28,8 @@ let play = false;
 let timer = null;
 let flips = 0;
 let match = 0;
+let difficulty = "medium";
+let pairsCount = 8; 
 
 function initTimer() {
     time++;
@@ -46,7 +48,8 @@ function createBoard() {
     document.querySelector('.game-board').replaceChildren();
 
     const gameBoard = document.querySelector('.game-board');
-    const shuffledCards = [...cardsArray, ...cardsArray].sort(() => 0.5 - Math.random());
+    const slicedCards = cardsArray.slice(0, pairsCount);
+    const shuffledCards = [...slicedCards, ...slicedCards].sort(() => 0.5 - Math.random());
 
     shuffledCards.forEach(card => {
         const cardElement = document.createElement('div');
@@ -86,7 +89,7 @@ function flipCard() {
 function checkForMatch() {
     if (firstCard.dataset.name === secondCard.dataset.name) {
         match++;
-        if (match == cardsArray.length) {
+        if (match == pairsCount) {
             clearInterval(timer);
             showWinScreen();
             return;
@@ -155,6 +158,24 @@ refreshBtn.addEventListener("click", createBoard);
 refreshBtnWin.addEventListener('click', () => {
     document.querySelector('.win-screen').classList.add('hidden');
     createBoard();
+});
+document.querySelectorAll(".difficulty-bar button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".difficulty-bar button")
+            .forEach(b => b.classList.remove("active"));
+
+        btn.classList.add("active");
+        difficulty = btn.dataset.level;
+
+        if (difficulty === "easy")
+            pairsCount = 4;
+        if (difficulty === "medium")
+            pairsCount = 8;
+        if (difficulty === "hard")
+            pairsCount = 12;
+
+        createBoard();
+    });
 });
 
 document.addEventListener('DOMContentLoaded', createBoard);
