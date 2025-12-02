@@ -48,7 +48,8 @@ function createBoard() {
     document.querySelector('.game-board').replaceChildren();
 
     const gameBoard = document.querySelector('.game-board');
-    const slicedCards = cardsArray.slice(0, pairsCount);
+    const shuffledArrayCards = cardsArray.sort(() => 0.5 - Math.random());
+    const slicedCards = shuffledArrayCards.slice(0, pairsCount);
     const shuffledCards = [...slicedCards, ...slicedCards].sort(() => 0.5 - Math.random());
 
     shuffledCards.forEach(card => {
@@ -133,10 +134,31 @@ function calculateScore() {
 }
 
 function saveHighscore(score) {
-    let best = localStorage.getItem("highscore") || 0;
+    let best;
+    switch (difficulty) {
+        case "easy":
+            best = localStorage.getItem("highscoreEasy") || 0;
+            break;
+        case "medium":
+            best = localStorage.getItem("highscoreMedium") || 0;
+            break;
+        case "hard":
+            best = localStorage.getItem("highscoreHard") || 0;
+            break;
+    }
 
     if (score > best) {
-        localStorage.setItem("highscore", score);
+        switch (difficulty) {
+            case "easy":
+                localStorage.setItem("highscoreEasy", score);
+                break;
+            case "medium":
+                localStorage.setItem("highscoreMedium", score);
+                break;
+            case "hard":
+                localStorage.setItem("highscoreHard", score);     
+                break;
+        }  
         return score;
     }
     return best;
@@ -167,13 +189,18 @@ document.querySelectorAll(".difficulty-bar button").forEach(btn => {
         btn.classList.add("active");
         difficulty = btn.dataset.level;
 
-        if (difficulty === "easy")
-            pairsCount = 4;
-        if (difficulty === "medium")
-            pairsCount = 8;
-        if (difficulty === "hard")
-            pairsCount = 12;
-
+        switch (difficulty) {
+            case "easy":
+                pairsCount = 4;
+                break;
+            case "medium":
+                pairsCount = 8;
+                break;
+            case "hard":
+                pairsCount = 12;
+                break;
+        }
+        
         createBoard();
     });
 });
