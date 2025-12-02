@@ -35,8 +35,8 @@ let pairsCount = 8;                                                             
 
 //Funkce časovače hry
 function initTimer() {
-    time++;                                                                                     //
-    timeTag.innerText = time;                                                                   //
+    time++;                                                                                     //Zvýšení časovače o sekundu
+    timeTag.innerText = time;                                                                   //Zobrazení času na obrazovce
 }
 
 //Funkce vytvoření hracího pole
@@ -110,9 +110,9 @@ function checkForMatch() {
 
 //Funkce deaktivace karet při shodě
 function disableCards() {
-    firstCard.removeEventListener('click', flipCard);                                           //
-    secondCard.removeEventListener('click', flipCard);                                          //
-    resetBoard();                                                                               //
+    firstCard.removeEventListener('click', flipCard);                                           //Odstranit atribut click u první kliknuté karty
+    secondCard.removeEventListener('click', flipCard);                                          //Odstranit atribut click u druhé kliknuté karty
+    resetBoard();                                                                               //Návrat do původního stavu před výběrem karet
 }
 
 //Funkce převrácení karet zpět při neshodě
@@ -133,15 +133,15 @@ function unflipCards() {
 
 //Funkce návratu do původního stavu před výběrem karet
 function resetBoard() {
-    [firstCard, secondCard, lockBoard] = [null, null, false];                                   //
+    [firstCard, secondCard, lockBoard] = [null, null, false];                                   //Proměnné jsou nastaveny do počátečního stavu
 }
 
 //Funkce počítání bodů
 function calculateScore() {
-    const speed = Math.max(0, 200 - time);                                                      //
-    const efficiency = Math.max(0, 200 - flips);                                                //
+    const speed = Math.max(0, 200 - time);                                                      //Počítání bodů za rychlost
+    const efficiency = Math.max(0, 200 - flips);                                                //Počítání bodů za efektivitu
 
-    return speed * 2 + efficiency * 3;                                                          //
+    return speed * 2 + efficiency * 3;                                                          //Vrácení bodů podle vzorce
 }
 
 //Funkce ukládání nejvyšších bodů
@@ -178,45 +178,43 @@ function saveHighscore(score) {
 
 //Funkce zobrazení okna při výhře
 function showWinScreen() {
-    const score = calculateScore();                                                             //
-    const highScore = saveHighscore(score);                                                     //
+    const score = calculateScore();                                                             //Sčítání bodů
+    const highScore = saveHighscore(score);                                                     //Získání maximálního počtu bodů
 
-    scoreTag.innerText = score;                                                                 //
-    highScoreTag.innerText = highScore;                                                         //
-    document.querySelector(".current-score b").textContent = score;                             //
-    document.querySelector(".best-score b").textContent = highScore;                            //
+    scoreTag.innerText = score;                                                                 //Zobrazení počtu bodů na obrazovce
+    highScoreTag.innerText = highScore;                                                         //Zobrazení maximálního počtu bodů na obrazovce
 
-    document.querySelector(".win-screen").classList.remove("hidden");                           //
+    document.querySelector(".win-screen").classList.remove("hidden");                           //Odstranit atribut hidden a zobrazí se okno vítězství
 }
 
 refreshBtn.addEventListener("click", createBoard);                                              //Sledování stisknutí tlačítka nové hry
 
-refreshBtnWin.addEventListener('click', () => {                                                 //Sledování stisknutí tlačítka nové hry v okně při výhře
-    document.querySelector('.win-screen').classList.add('hidden');
-    createBoard();
+refreshBtnWin.addEventListener('click', () => {                                                 //Sledování stisknutí tlačítka nové hry v okně při výhře a kód provedení po stisknutí
+    document.querySelector('.win-screen').classList.add('hidden');                              //Skrýt vítězné okno
+    createBoard();                                                                              //Vytvořit hrací pole
 });
 
 document.querySelectorAll(".difficulty-bar button").forEach(btn => {                            //Výběr obtížnosti hry
-    btn.addEventListener("click", () => {                                                       //
-        document.querySelectorAll(".difficulty-bar button")                                     //
-            .forEach(b => b.classList.remove("active"));                                        //
+    btn.addEventListener("click", () => {                                                       //Sledování stisknutí tlačítka obtížnosti hry a kód provedení po stisknutí
+        document.querySelectorAll(".difficulty-bar button")                                     //Odstranění atributu active u všech tlačítek složitosti
+            .forEach(b => b.classList.remove("active"));                                        
 
-        btn.classList.add("active");                                                            //
-        difficulty = btn.dataset.level;                                                         //
+        btn.classList.add("active");                                                            //Přidání atributu active k stisknutému tlačítku složitosti
+        difficulty = btn.dataset.level;                                                         //Zápis úrovně obtížnosti do globální proměnné
 
-        switch (difficulty) {                                                                   //
-            case "easy":                                                                        //
-                pairsCount = 4;                                                                 //
-                break;                                                                          //
-            case "medium":                                                                      //
-                pairsCount = 8;                                                                 //
-                break;                                                                          //
-            case "hard":                                                                        //
-                pairsCount = 12;                                                                //
-                break;                                                                          //
+        switch (difficulty) {                                                                   //Porovnání úrovně obtížnosti
+            case "easy":                                                                        //Pokud je lehká
+                pairsCount = 4;                                                                 //4 páry karet ve hře
+                break;                                                                          //Opustit porovnání
+            case "medium":                                                                      //Pokud je střední
+                pairsCount = 8;                                                                 //8 párů karet ve hře
+                break;                                                                          //Opustit porovnání
+            case "hard":                                                                        //Pokud je těžká
+                pairsCount = 12;                                                                //12 párů karet ve hře
+                break;                                                                          //Opustit porovnání
         }
 
-        createBoard();                                                                          //
+        createBoard();                                                                          //Vytvořit hrací pole
     });
 });
 
