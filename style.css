@@ -1,236 +1,263 @@
-/*  */
+/* Základní parametry stránky */
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-    margin: 0;
+  display: flex;                                            /* Stránka používá flexbox pro rozložení obsahu */
+  flex-direction: column;                                   /* Prvky jsou řazeny vertikálně */
+  justify-content: center;                                  /* Vertikální zarovnání na střed */
+  align-items: center;                                      /* Horizontální zarovnání na střed */
+  height: 100vh;                                            /* Výška odpovídá výšce okna */
+  background-color: #f0f0f0;                              /* Světle šedé pozadí */
+  font-family: Arial, sans-serif;                           /* Výchozí font */
+  margin: 0;                                                /* Odstranění výchozích okrajů */
 }
 
-/*  */
+/* Hrací pole s kartami */
 .game-board {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(70px, 1fr));
-    gap: 10px;
-    width: 100%;
-    max-width: 430px;
+  display: grid;                                            /* Mřížka pro karty */
+  grid-template-columns: repeat(4, minmax(70px, 1fr));      /* 4 sloupce, karty se zmenší až na 70px */
+  gap: 10px;                                                /* Vzdálenost mezi kartami */
+  width: 100%;                                              /* Deska využije celou dostupnou šířku */
+  max-width: 430px;                                         /* Maximální šířka */
 }
 
-/*  */
+/* Spodní panel s časem, tahy a tlačítky */
 .stat-bar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 430px;
-    height: auto;
-    margin-top: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 8px 12px;
-    box-sizing: border-box;
-    flex-wrap: wrap;
+  display: flex;                                            /* Všechny prvky v jedné řadě */
+  align-items: center;                                      /* Vertikální zarovnání */
+  justify-content: space-between;                           /* Mezera mezi jednotlivými prvky */
+  width: 100%;                                              /* Přizpůsobení dostupné šířce */
+  max-width: 430px;                                         /* Maximální šířka panelu */
+  background: #ffffff;;                                   /* Bílé pozadí panelu */
+  padding: 8px 12px;                                        /* Vnitřní okraje */
+  border-radius: 8px;                                       /* Zaoblení rohů */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);                  /* Jemný stín pod panelem */
+  box-sizing: border-box;                                   /* Padding se počítá do celkové šířky */
+  margin-top: 10px;                                         /* Vzdálenost od herní desky */
+  gap: 10px;                                                /* Mezera mezi prvky */
 }
 
-/*  */
+/* Textové prvky ve stat-bar */
 .stat-bar p{
-  font-size: 18px;
-  height: 17px;
-  padding-right: 18px;
-  border-right: 1px solid #ccc;
+  margin: 0;                                                /* Bez vnějších okrajů */
+  font-size: 16px;                                          /* Velikost textu */
+  white-space: nowrap;                                      /* Zabrání zalomení textu */
+  padding-right: 10px;                                      /* Prostor pro oddělovací čáru */
+  border-right: 1px solid #ccc;                           /* Svislá oddělovací čára */
 }
 
-/*  */
+/* Odstavec mezi textem a číslem */
 .stat-bar p span{
-  margin-left: 8px;
+  margin-left: 8px;                                          /* Malá mezera mezi názvem a číslem */
 }
 
-/*  */
-.stat-bar button{
-  cursor: pointer;
-    font-size: 16px;
-    line-height: 1;
-    color: #0400ff;
-    padding: 8px 16px;
-    background: #ffffff;
-    border: 2px solid #0400ff;
-    border-radius: 6px;
-    white-space: nowrap;
-    min-width: 110px;
-    text-align: center;
-    box-sizing: border-box;
+/* Tlačítko „Nová hra“  */
+.new-game-btn{
+  cursor: pointer;                                          /* Kurzor ve tvaru ruky */
+  font-size: 16px;                                          /* Velikost textu */
+  color: #0400ff;                                         /* Modrá barva textu */
+  background: #ffffff;;                                   /* Bílé pozadí */
+  border-radius: 6px;                                       /* Zaoblené rohy */
+  border: 2px solid #0400ff;                              /* Modrý rámeček */
+  padding: 6px 14px;                                        /* Vnitřní okraje */
+  white-space: nowrap;                                      /* Zabránění zalomení textu */
+  transition: 0.2s;                                         /* Plynulá animace při hoveru */
 }
 
-/*  */
-.stat-bar button:hover{
-  color: #ffffff;
-  background: #0400ff;
+/* Navezení na tlačítko „Nová hra“  */
+.new-game-btn:hover {
+  background: #0400ff;                                    /* Modré pozadí */
+  color: #ffffff;;                                        /* Bílý text */
 }
 
-/*  */
+/* Tlačítko „?“  */
+.help-btn {
+  width: 32px;                                              /* Šířka tlačítka */
+  height: 32px;                                             /* Výška tlačítka */
+  padding: 0;                                               /* Bez vnitřních okrajů */
+  border-radius: 50%;                                       /* Kolečko */
+  border: 2px solid #0400ff;                              /* Modrá čára kolem */
+  background: #ffffff;;                                   /* Bílé pozadí */
+  color: #0400ff;                                         /* Modrý text */
+  font-size: 18px;                                          /* Velikost otazníku */
+  font-weight: bold;                                        /* Ztučněný znak  */
+  line-height: 28px;                                        /* Vertikální zarovnání textu */
+  text-align: center;                                       /* Horizontální zarovnání textu */
+  cursor: pointer;                                          /* Kurzor ruky */
+  transition: 0.2s;                                         /* Plynulé animace */
+}
+
+/* Navezení na „?“  */
+.help-btn:hover {
+  background: #0400ff;                                    /* Modré pozadí */
+  color: #ffffff;;                                        /* Bílý text */
+}
+
+/* Tlačítko uvnitř okna vítězství */
 .win-box button{
-  cursor: pointer;
-    font-size: 16px;
-    line-height: 1;
-    color: #0400ff;
-    padding: 8px 16px;
-    background: #ffffff;
-    border: 2px solid #0400ff;
-    border-radius: 6px;
-    white-space: nowrap;
-    min-width: 110px;
-    text-align: center;
-    box-sizing: border-box;
+  cursor: pointer;                                          /* Kurzor ruky */
+  font-size: 16px;                                          /* Velikost textu */
+  line-height: 1;                                           /* Hustší řádkování */
+  color: #0400ff;                                         /* Modrý text */
+  padding: 8px 16px;                                        /* Vnitřní okraje */
+  background: #ffffff;                                    /* Bílé pozadí */
+  border: 2px solid #0400ff;                              /* Modrá čára */
+  border-radius: 6px;                                       /* Zaoblené rohy */
+  white-space: nowrap;                                      /* Text se nezalamuje */
+  min-width: 110px;                                         /* Minimální šířka */
+  text-align: center;                                       /* Zarovnání na střed */
+  box-sizing: border-box;                                   /* Padding se započítá do šířky */
+  transition: 0.2s;                                         /* Plynulé animace */
 }
 
-/*  */
+/* Navezení na tlačítko ve vítězném okně */
 .win-box button:hover{
-  color: #ffffff;
-  background: #0400ff;
+  color: #ffffff;                                         /* Bílý text */
+  background: #0400ff;                                    /* Modré pozadí */
 }
 
-/*  */
+/* Karta */
 .card {
-    width: 100%;
-    aspect-ratio: 1;
-    max-width: 100px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;                                              /* Karta zabírá celou šířku buňky */
+  aspect-ratio: 1;                                          /* Karta je vždy čtverec */
+  max-width: 100px;                                         /* Maximální velikost */
+  background-color: #ffffff;                              /* Bílé pozadí */
+  border-radius: 8px;                                       /* Zaoblení rohů */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);               /* Stín pod kartou */
+  cursor: pointer;                                          /* Kurzor ruky */
+  display: flex;                                            /* Flexbox uvnitř karty */
+  justify-content: center;                                  /* Horizontální zarovnání obrázku */
+  align-items: center;                                      /* Vertikální zarovnání obrázku */
 }
 
-/*  */
+/* Animace otřesů při chybě */
 .card.shake{
-  animation: shake 0.35s ease-in-out;
+  animation: shake 0.35s ease-in-out;                       /* Přidání animace */
 }
 
-/*  */
+/* Animované snímky otřesů */
 @keyframes shake {
-  0%, 100%{
-    transform: translateX(0);
+  0%, 100%{                                                 /* Začátek a konec animace */
+    transform: translateX(0);                               /* Bez posunutí */
   }
-  20%{
-    transform: translateX(-10px);
+  20%{                                                      /* 20% animace */
+    transform: translateX(-10px);                           /* Trhnutí doleva */
   }
-  40%{
-    transform: translateX(10px);
+  40%{                                                      /* 40% animace */
+    transform: translateX(10px);                            /* Trhnutí doprava */
   }
-  60%{
-    transform: translateX(-5px);
+  60%{                                                      /* 60% animace */
+    transform: translateX(-5px);                            /* Menší posun */
   }
-  80%{
-    transform: translateX(5px);
+  80%{                                                      /* 80% animace */
+    transform: translateX(5px);                             /* Poslední trhnutí */
   }
 }
 
-/*  */
+/* Skryté zobrazení karty */
 .card img {
-    max-width: 100%;
-    max-height: 100%;
-    display: none;
+  max-width: 100%;                                          /* Obrázek nepřesáhne kartu */
+  max-height: 100%;                                         
+  display: none;                                            /* Ve výchozím stavu neviditelný */
 }
 
-/*  */
+/* Zobrazení obrázku u otevřené karty */
 .card.flipped img {
-    display: block;
+  display: block;                                           /* Zobrazíme obrázek */
 }
 
-/*  */
+/* Tmavý poloprůhledný pozadí okna vítězství */
 .win-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;                                          /* Překryv přes celou stránku */
+  top: 0;                                                   /* Zarovnání nahoře */
+  left: 0;                                                  /* Zarovnání vlevo */
+  width: 100%;                                              /* Překryje celou šířku */
+  height: 100%;                                             /* Překryje celou výšku */
+  background: rgba(0, 0, 0, 0.6);                         /* Poloprůhledné tmavé pozadí */
+  display: flex;                                            /* Centrované zarovnání */
+  justify-content: center;                                  
+  align-items: center;                                      
+  z-index: 1000;                                            /* Vždy nad ostatními prvky */
 }
 
-/*  */
+/* Okno vítězství */
 .win-box {
-    background: white;
-    padding: 30px 50px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 24px;
+  background: white;                                      /* Bílé okno */
+  padding: 30px 50px;                                       /* Vnitřní okraje */
+  border-radius: 10px;                                      /* Zaoblené rohy */
+  text-align: center;                                       /* Text uprostřed */
+  font-size: 24px;                                          /* Větší text */
 }
 
-/*  */
+/* Třída skrytí prvků */
 .hidden {
-    display: none;
+  display: none;                                            /* Úplně skryje prvek */
 }
 
-/*  */
-@media (max-width: 480px) {
-
-    body {
-        padding: 10px;
-        height: auto;
-    }
-
-    .stat-bar {
-        font-size: 14px;
-        gap: 8px;
-    }
-
-    .stat-bar p {
-        font-size: 14px;
-        padding-right: 10px;
-    }
-
-    .stat-bar button {
-        padding: 4px 10px;
-        font-size: 14px;
-    }
-
-    .win-box {
-        width: 90%;
-        max-width: 300px;
-        padding: 20px;
-        font-size: 20px;
-    }
-
-    .difficulty-bar button {
-        font-size: 13px;
-        padding: 5px 10px;
-    }
-}
-
-/*  */
+/* Panel pro výběr obtížnosti */
 .difficulty-bar {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    max-width: 430px;
-    margin-bottom: 10px;
+  display: flex;                                            /* Tlačítka v jedné řadě */
+  justify-content: center;                                  /* Zarovnání na střed */
+  gap: 10px;                                                /* Mezera mezi tlačítky */
+  width: 100%;                                              /* Plná šířka */
+  max-width: 430px;                                         /* Maximální šířka */
+  margin-bottom: 10px;                                      /* Odstup od herní desky */
 }
 
-/*  */
+/* Tlačítka obtížnosti */
 .difficulty-bar button {
-    font-size: 15px;
-    padding: 6px 14px;
-    border-radius: 6px;
-    border: 2px solid #0400ff;
-    background: #fff;
-    color: #0400ff;
-    cursor: pointer;
-    white-space: nowrap;
+  font-size: 15px;                                          /* Velikost textu */
+  padding: 6px 14px;                                        /* Vnitřní okraje */
+  border-radius: 6px;                                       /* Zaoblené rohy */
+  border: 2px solid #0400ff;                              /* Modrá čára */
+  background: #ffffff;;                                   /* Bílé pozadí */
+  color: #0400ff;                                         /* Modrý text */
+  cursor: pointer;                                          /* Kurzor ruky */
+  white-space: nowrap;                                      /* Nezalamovat text */
 }
 
-/*  */
+/* Aktivní zvolená obtížnost */
 .difficulty-bar button.active {
-    background: #0400ff;
-    color: white;
+  background: #0400ff;                                    /* Modré pozadí */
+  color: #ffffff;;                                        /* Bílý text */
+}
+
+/* Přizpůsobení pro malé obrazovky */
+@media (max-width: 480px) {
+  body {                                                    /* Měníme stránku pro malá zařízení */
+    padding: 10px;                                          
+    height: auto;                                           
+  }
+
+  .stat-bar {                                               /* Zúžíme panel */
+    font-size: 14px;                                        
+    gap: 8px;                                               
+  }
+
+  .stat-bar p {                                             /* Zmenšujeme text */
+    font-size: 14px;                                        
+    padding-right: 10px;                                    
+  }
+
+  .new-game-btn {                                           /* Menší tlačítko „Nová hra“ */
+    padding: 4px 10px;                                      
+    font-size: 14px;                                        
+  }
+
+  .help-btn {                                               /* Menší tlačítko „?“ */
+    width: 28px;                                            
+    height: 28px;                                           
+    font-size: 16px;                                        
+    line-height: 24px;                                      
+  }
+
+  .win-box {                                                /* Zmenšení okna vítězství */
+    width: 90%;                                             
+    max-width: 300px;                                       
+    padding: 20px;                                          
+    font-size: 20px;                                        
+  }
+
+  .difficulty-bar button {                                  /* Tlačítka obtížnosti jsou kompaktnější */
+    font-size: 13px;                                        
+    padding: 5px 10px;                                      
+  }
 }

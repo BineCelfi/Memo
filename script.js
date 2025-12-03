@@ -1,4 +1,5 @@
-const cardsArray = [                                                                            //Řada obrázků karet
+//Matice obrázků karet
+const cardsArray = [
     { name: 'card1', img: 'images/card1.svg' },
     { name: 'card2', img: 'images/card2.svg' },
     { name: 'card3', img: 'images/card3.svg' },
@@ -14,24 +15,25 @@ const cardsArray = [                                                            
 ];
 
 //Vyhlašování prvků  pro rychlý přístup
-const timeTag = document.querySelector(".time b");                                              //
-const flipsTag = document.querySelector(".flips b");                                            //
-const scoreTag = document.querySelector(".current-score b");                                    //
-const highScoreTag = document.querySelector(".best-score b");                                   //
-const refreshBtn = document.querySelector(".stat-bar button");                                  //
-const refreshBtnWin = document.querySelector(".win-box button");                                //
+const timeTag = document.querySelector(".time b");                                              //Prvek pro zobrazení času
+const flipsTag = document.querySelector(".flips b");                                            //Prvek pro zobrazení převrácení
+const scoreTag = document.querySelector(".current-score b");                                    //Prvek pro zobrazení bodů za hru
+const highScoreTag = document.querySelector(".best-score b");                                   //Prvek pro zobrazení maximálního počtu bodů
+const refreshBtn = document.querySelector(".new-game-btn");                                     //Prvek tlačítka pro zahájení nové hry
+const helpBtn = document.querySelector(".help-btn");                                            //Prvek tlačítka nápovědy ke hře
+const refreshBtnWin = document.querySelector(".win-box button");                                //Prvek tlačítka pro zahájení nové hry z okna vítězství
 
 //Vyhlašování proměnných
-let firstCard = null;                                                                           //
-let secondCard = null;                                                                          //
-let lockBoard = false;                                                                          //
-let time = 0;                                                                                   //
-let play = false;                                                                               //
-let timer = null;                                                                               //
-let flips = 0;                                                                                  //
-let match = 0;                                                                                  //
-let difficulty = "medium";                                                                      //
-let pairsCount = 8;                                                                             //
+let firstCard = null;                                                                           //Proměnná první otočené karty
+let secondCard = null;                                                                          //Proměnná druhé otočené karty
+let lockBoard = false;                                                                          //Proměnná blokování otočení karet
+let time = 0;                                                                                   //Proměnná času
+let play = false;                                                                               //Proměnná stavu hry
+let timer = null;                                                                               //Proměnná časovače
+let flips = 0;                                                                                  //Proměnná počtu otočení
+let match = 0;                                                                                  //Proměnná počtu shodných karet
+let difficulty = "medium";                                                                      //Proměnná obtížnosti, výchozí nastavení je střední
+let pairsCount = 8;                                                                             //Proměnná počtu párů ve hře, výchozí nastavení je 8
 
 //Funkce časovače hry
 function initTimer() {
@@ -41,70 +43,70 @@ function initTimer() {
 
 //Funkce vytvoření hracího pole
 function createBoard() {
-    clearInterval(timer);                                                                       //
-    resetBoard();                                                                               //
-    play = false;                                                                               //
-    time = 0;                                                                                   //
-    flips = 0;                                                                                  //
-    match = 0;                                                                                  //
-    timeTag.innerText = time;                                                                   //
-    flipsTag.innerText = flips;                                                                 //
+    clearInterval(timer);                                                                       //Zastavení časovače
+    resetBoard();                                                                               //Návrat do původního stavu před výběrem karet
+    play = false;                                                                               //Hra se nespustí
+    time = 0;                                                                                   //Čas na 0 sekund
+    flips = 0;                                                                                  //Převrácení na 0
+    match = 0;                                                                                  //Shody na 0
+    timeTag.innerText = time;                                                                   //Zobrazit čas
+    flipsTag.innerText = flips;                                                                 //Zobrazit počet převrácení
 
-    document.querySelector('.game-board').replaceChildren();                                    //
+    document.querySelector('.game-board').replaceChildren();                                    //Odstranit staré karty, které zbyly z předchozí hry
 
-    const gameBoard = document.querySelector('.game-board');                                    //
-    const shuffledArrayCards = cardsArray.sort(() => 0.5 - Math.random());                      //
-    const slicedCards = shuffledArrayCards.slice(0, pairsCount);                                //
-    const shuffledCards = [...slicedCards, ...slicedCards].sort(() => 0.5 - Math.random());     //
+    const gameBoard = document.querySelector('.game-board');                                    //Vybrat prvek "game-board"
+    const shuffledArrayCards = cardsArray.sort(() => 0.5 - Math.random());                      //Promíchání matici obrázků
+    const slicedCards = shuffledArrayCards.slice(0, pairsCount);                                //Počet párů se vybírá na základě složitosti hry z maticí obrázků
+    const shuffledCards = [...slicedCards, ...slicedCards].sort(() => 0.5 - Math.random());     //Vytvoří se matice karet v párech a náhodně se seřadí
 
-    shuffledCards.forEach(card => {                                                             //
-        const cardElement = document.createElement('div');                                      //
-        cardElement.classList.add('card');                                                      //
-        cardElement.dataset.name = card.name;                                                   //
+    shuffledCards.forEach(card => {                                                             //Pro každou vytvořenou kartu provést kód
+        const cardElement = document.createElement('div');                                      //Vytvořit prvek "div"
+        cardElement.classList.add('card');                                                      //Přidat mu třídu "card"
+        cardElement.dataset.name = card.name;                                                   //Přidat mu jméno podle názvu obrázku
 
-        const cardImage = document.createElement('img');                                        //
-        cardImage.src = card.img;                                                               //
-        cardElement.appendChild(cardImage);                                                     //
+        const cardImage = document.createElement('img');                                        //Vytvořit prvek "img"
+        cardImage.src = card.img;                                                               //Přidat mu zdroj obrázku z matice obrázků
+        cardElement.appendChild(cardImage);                                                     //Vytvořit podřízený prvek "img"
 
-        cardElement.addEventListener('click', flipCard);                                        //
-        gameBoard.appendChild(cardElement);                                                     //
+        cardElement.addEventListener('click', flipCard);                                        //Přidat podmínku kliknutí pro prvek karty a její provedení
+        gameBoard.appendChild(cardElement);                                                     //Vytvořit podřízený prvek "div"
     });
 }
 
 //Funkce převrácení karty
 function flipCard() {
-    if(!play) {                                                                                 //
-        play = true;                                                                            //
-        timer = setInterval(initTimer, 1000);                                                   //
+    if(!play) {                                                                                 //Zkontrolujte, zda hra není spuštěna
+        play = true;                                                                            //Pokud není spuštěno, nastavit status jako spuštěno.
+        timer = setInterval(initTimer, 1000);                                                   //Spustit časovač s intervalem 1 sekunda
     }
-    if (lockBoard) return;                                                                      //
-    if (this === firstCard) return;                                                             //
+    if (lockBoard) return;                                                                      //Pokud je herní pole blokováno, vrátí se výsledek a funkce se ukončí
+    if (this === firstCard) return;                                                             //Přísné porovnání opakovaného stisknutí první vybrané karty, pokud byla stisknuta znovu, funkce se ukončí
 
-    flips++;                                                                                    //
-    flipsTag.innerText = flips;                                                                 //
-    this.classList.add('flipped');                                                              //
+    flips++;                                                                                    //Zvýšení převratu o 1
+    flipsTag.innerText = flips;                                                                 //Závěr o novém významu převratů
+    this.classList.add('flipped');                                                              //Přidání atributu "flipped"
 
-    if (!firstCard) {                                                                           //
-        firstCard = this;                                                                       //
-        return;                                                                                 //
+    if (!firstCard) {                                                                           //Pokud je proměnná první karty prázdná
+        firstCard = this;                                                                       //Zapsat danou kartu do proměnné první karty
+        return;                                                                                 //Vrátit výsledek funkce, čímž se z ní ukončí
     }
 
-    secondCard = this;                                                                          //
-    checkForMatch();                                                                            //
+    secondCard = this;                                                                          //Zapsat danou kartu do proměnné druhé karty
+    checkForMatch();                                                                            //Vyvolat funkci kontroly shody
 }
 
 //Funkce kontroly shody karet
 function checkForMatch() {
-    if (firstCard.dataset.name === secondCard.dataset.name) {                                   //
-        match++;                                                                                //
-        if (match == pairsCount) {                                                              //
-            clearInterval(timer);                                                               //
-            showWinScreen();                                                                    //
-            return;                                                                             //
+    if (firstCard.dataset.name === secondCard.dataset.name) {                                   //Porovnání názvu první karty a druhé karty
+        disableCards();                                                                         //Vyvolání funkce deaktivace karet při shodě
+        match++;                                                                                //Přidání 1 ke shodám
+        if (match == pairsCount) {                                                              //Porovnání počtu shod s počtem párů
+            clearInterval(timer);                                                               //Zastavit časovač
+            showWinScreen();                                                                    //Volání funkce zobrazení vítězného okna
+            return;                                                                             //Ukončení funkce
         }
-        disableCards();                                                                         //
-    } else {                                                                                    //
-        unflipCards();                                                                          //
+    } else {                                                                                    //Jinak
+        unflipCards();                                                                          //Vyvolání funkce převrácení karet zpět v případě neshody
     }
 }
 
@@ -117,18 +119,18 @@ function disableCards() {
 
 //Funkce převrácení karet zpět při neshodě
 function unflipCards() { 
-    lockBoard = true;                                                                           //
+    lockBoard = true;                                                                           //Zablokovat karty na dobu převratu
 
-    setTimeout(() => {                                                                          //
-        firstCard.classList.add('shake');                                                       //
-        secondCard.classList.add('shake');                                                      //
-    }, 400);                                                                                    //
+    setTimeout(() => {                                                                          //Nastavit časovač pro přidání atributu "shake"
+        firstCard.classList.add('shake');                                                       //Přiřazení atributu „shake“ první kartě
+        secondCard.classList.add('shake');                                                      //Přiřazení atributu „shake“ druhé kartě
+    }, 400);                                                                                    //Časovač na 400 milisekund
 
-    setTimeout(() => {                                                                          //
-        firstCard.classList.remove('shake', 'flipped');                                         //
-        secondCard.classList.remove('shake', 'flipped');                                        //
-        resetBoard();                                                                           //
-    }, 1000);                                                                                   //
+    setTimeout(() => {                                                                          //Nastavit časovač pro odstranění atributů
+        firstCard.classList.remove('shake', 'flipped');                                         //Odstranit atributy „shake“ a „flipped“ u první karty
+        secondCard.classList.remove('shake', 'flipped');                                        //Odstranit atributy „shake“ a „flipped“ u druhé karty
+        resetBoard();                                                                           //Návrat do původního stavu před výběrem karet
+    }, 1000);                                                                                   //Časovač na 1 sekundu
 }
 
 //Funkce návratu do původního stavu před výběrem karet
@@ -140,40 +142,40 @@ function resetBoard() {
 function calculateScore() {
     const speed = Math.max(0, 200 - time);                                                      //Počítání bodů za rychlost
     const efficiency = Math.max(0, 200 - flips);                                                //Počítání bodů za efektivitu
-
+    
     return speed * 2 + efficiency * 3;                                                          //Vrácení bodů podle vzorce
 }
 
 //Funkce ukládání nejvyšších bodů
 function saveHighscore(score) {
-    let best;                                                                                   //
-    switch (difficulty) {                                                                       //
-        case "easy":                                                                            //
-            best = localStorage.getItem("highscoreEasy") || 0;                                  //
-            break;                                                                              //
-        case "medium":                                                                          //
-            best = localStorage.getItem("highscoreMedium") || 0;                                //
-            break;                                                                              //
-        case "hard":                                                                            //
-            best = localStorage.getItem("highscoreHard") || 0;                                  //
-            break;                                                                              //
+    let best;                                                                                   //Deklarace proměnné s nejlepším skóre
+    switch (difficulty) {                                                                       //Porovnání podle složitosti
+        case "easy":                                                                            //Pokud je lehká složitost
+            best = localStorage.getItem("highscoreEasy") || 0;                                  //Získat minulou hodnotu nejvyššího skóre pro danou složitost nebo 0 v případě neexistence
+            break;                                                                              //Ukončit srovnání
+        case "medium":                                                                          //Pokud je střední složitost
+            best = localStorage.getItem("highscoreMedium") || 0;                                //Získat minulou hodnotu nejvyššího skóre pro danou složitost nebo 0 v případě neexistence
+            break;                                                                              //Ukončit srovnání
+        case "hard":                                                                            //Pokud je těžká obtížnost
+            best = localStorage.getItem("highscoreHard") || 0;                                  //Získat minulou hodnotu nejvyššího skóre pro danou složitost nebo 0 v případě neexistence
+            break;                                                                              //Ukončit srovnání
     }
 
-    if (score > best) {                                                                         //
-        switch (difficulty) {                                                                   //
-            case "easy":                                                                        //
-                localStorage.setItem("highscoreEasy", score);                                   //
-                break;                                                                          //
-            case "medium":                                                                      //
-                localStorage.setItem("highscoreMedium", score);                                 //
-                break;                                                                          //
-            case "hard":                                                                        //
-                localStorage.setItem("highscoreHard", score);                                   //
-                break;                                                                          //
+    if (score > best) {                                                                         //Srovnání skóre za hru s nejvyšším skóre
+        switch (difficulty) {                                                                   //Porovnání podle složitosti
+            case "easy":                                                                        //Pokud je lehká složitost
+                localStorage.setItem("highscoreEasy", score);                                   //Zaznamenat počet skóre za hru jako nejvyšší skóre v dané složitosti
+                break;                                                                          //Ukončit srovnání
+            case "medium":                                                                      //Pokud je střední obtížnost
+                localStorage.setItem("highscoreMedium", score);                                 //Zaznamenat počet skóre za hru jako nejvyšší skóre v dané složitosti
+                break;                                                                          //Ukončit srovnání
+            case "hard":                                                                        //Pokud je těžká obtížnost
+                localStorage.setItem("highscoreHard", score);                                   //Zaznamenat počet skóre za hru jako nejvyšší skóre v dané složitosti
+                break;                                                                          //Ukončit srovnání
         }  
-        return score;                                                                           //
+        return score;                                                                           //Vrátit hodnotu skóre za hru
     }
-    return best;                                                                                //
+    return best;                                                                                //Vrátit maximální počet skóre
 }
 
 //Funkce zobrazení okna při výhře
@@ -194,7 +196,7 @@ refreshBtnWin.addEventListener('click', () => {                                 
     createBoard();                                                                              //Vytvořit hrací pole
 });
 
-document.querySelectorAll(".difficulty-bar button").forEach(btn => {                            //Výběr obtížnosti hry
+document.querySelectorAll(".difficulty-bar button").forEach(btn => {                            //Výběr obtížnosti hry, udělat pro každé tlačítko
     btn.addEventListener("click", () => {                                                       //Sledování stisknutí tlačítka obtížnosti hry a kód provedení po stisknutí
         document.querySelectorAll(".difficulty-bar button")                                     //Odstranění atributu active u všech tlačítek složitosti
             .forEach(b => b.classList.remove("active"));                                        
@@ -216,6 +218,11 @@ document.querySelectorAll(".difficulty-bar button").forEach(btn => {            
 
         createBoard();                                                                          //Vytvořit hrací pole
     });
+});
+
+helpBtn.addEventListener("click", () => {                                                       //Sledování stisknutí tlačítka nápovědy
+    alert("Memo je hra na paměť. V této hře je třeba najít páry karet. " + 
+        "Čím rychleji a čím méně karet převrátíte, tím lepší bude váš výsledek.");              //Zobrazení nápovědy ke hře v okně oznámení
 });
 
 document.addEventListener('DOMContentLoaded', createBoard);                                     //Po načtení celého dokumentu se spustí vytváření hracího pole
