@@ -5,7 +5,7 @@ body {
   justify-content: center;                                  /* Vertikální zarovnání na střed */
   align-items: center;                                      /* Horizontální zarovnání na střed */
   height: 100vh;                                            /* Výška odpovídá výšce okna */
-  background-color: #f0f0f0;                              /* Světle šedé pozadí */
+  background-color: #f0f0f0;                                /* Světle šedé pozadí */
   font-family: Arial, sans-serif;                           /* Výchozí font */
   margin: 0;                                                /* Odstranění výchozích okrajů */
 }
@@ -26,10 +26,10 @@ body {
   justify-content: space-between;                           /* Mezera mezi jednotlivými prvky */
   width: 100%;                                              /* Přizpůsobení dostupné šířce */
   max-width: 430px;                                         /* Maximální šířka panelu */
-  background: #ffffff;;                                   /* Bílé pozadí panelu */
+  background: #ffffff;                                      /* Bílé pozadí panelu */
   padding: 8px 12px;                                        /* Vnitřní okraje */
   border-radius: 8px;                                       /* Zaoblení rohů */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);                  /* Jemný stín pod panelem */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);                    /* Jemný stín pod panelem */
   box-sizing: border-box;                                   /* Padding se počítá do celkové šířky */
   margin-top: 10px;                                         /* Vzdálenost od herní desky */
   gap: 10px;                                                /* Mezera mezi prvky */
@@ -41,22 +41,22 @@ body {
   font-size: 16px;                                          /* Velikost textu */
   white-space: nowrap;                                      /* Zabrání zalomení textu */
   padding-right: 10px;                                      /* Prostor pro oddělovací čáru */
-  border-right: 1px solid #ccc;                           /* Svislá oddělovací čára */
+  border-right: 1px solid #cccccc;                          /* Svislá oddělovací čára */
 }
 
 /* Odstavec mezi textem a číslem */
 .stat-bar p span{
-  margin-left: 8px;                                          /* Malá mezera mezi názvem a číslem */
+  margin-left: 8px;                                         /* Malá mezera mezi názvem a číslem */
 }
 
 /* Tlačítko „Nová hra“  */
 .new-game-btn{
   cursor: pointer;                                          /* Kurzor ve tvaru ruky */
   font-size: 16px;                                          /* Velikost textu */
-  color: #0400ff;                                         /* Modrá barva textu */
-  background: #ffffff;;                                   /* Bílé pozadí */
+  color: #0400ff;                                           /* Modrá barva textu */
+  background: #ffffff;                                      /* Bílé pozadí */
   border-radius: 6px;                                       /* Zaoblené rohy */
-  border: 2px solid #0400ff;                              /* Modrý rámeček */
+  border: 2px solid #0400ff;                                /* Modrý rámeček */
   padding: 6px 14px;                                        /* Vnitřní okraje */
   white-space: nowrap;                                      /* Zabránění zalomení textu */
   transition: 0.2s;                                         /* Plynulá animace při hoveru */
@@ -64,8 +64,8 @@ body {
 
 /* Navezení na tlačítko „Nová hra“  */
 .new-game-btn:hover {
-  background: #0400ff;                                    /* Modré pozadí */
-  color: #ffffff;;                                        /* Bílý text */
+  background: #0400ff;                                      /* Modré pozadí */
+  color: #ffffff;                                           /* Bílý text */
 }
 
 /* Tlačítko „?“  */
@@ -74,9 +74,9 @@ body {
   height: 32px;                                             /* Výška tlačítka */
   padding: 0;                                               /* Bez vnitřních okrajů */
   border-radius: 50%;                                       /* Kolečko */
-  border: 2px solid #0400ff;                              /* Modrá čára kolem */
-  background: #ffffff;;                                   /* Bílé pozadí */
-  color: #0400ff;                                         /* Modrý text */
+  border: 2px solid #0400ff;                                /* Modrá čára kolem */
+  background: #ffffff;                                      /* Bílé pozadí */
+  color: #0400ff;                                           /* Modrý text */
   font-size: 18px;                                          /* Velikost otazníku */
   font-weight: bold;                                        /* Ztučněný znak  */
   line-height: 28px;                                        /* Vertikální zarovnání textu */
@@ -87,8 +87,8 @@ body {
 
 /* Navezení na „?“  */
 .help-btn:hover {
-  background: #0400ff;                                    /* Modré pozadí */
-  color: #ffffff;;                                        /* Bílý text */
+  background: #0400ff;                                      /* Modré pozadí */
+  color: #ffffff;                                           /* Bílý text */
 }
 
 /* Tlačítko uvnitř okna vítězství */
@@ -96,10 +96,10 @@ body {
   cursor: pointer;                                          /* Kurzor ruky */
   font-size: 16px;                                          /* Velikost textu */
   line-height: 1;                                           /* Hustší řádkování */
-  color: #0400ff;                                         /* Modrý text */
+  color: #0400ff;                                           /* Modrý text */
   padding: 8px 16px;                                        /* Vnitřní okraje */
-  background: #ffffff;                                    /* Bílé pozadí */
-  border: 2px solid #0400ff;                              /* Modrá čára */
+  background: #ffffff;                                      /* Bílé pozadí */
+  border: 2px solid #0400ff;                                /* Modrá čára */
   border-radius: 6px;                                       /* Zaoblené rohy */
   white-space: nowrap;                                      /* Text se nezalamuje */
   min-width: 110px;                                         /* Minimální šířka */
@@ -110,8 +110,8 @@ body {
 
 /* Navezení na tlačítko ve vítězném okně */
 .win-box button:hover{
-  color: #ffffff;                                         /* Bílý text */
-  background: #0400ff;                                    /* Modré pozadí */
+  color: #ffffff;                                           /* Bílý text */
+  background: #0400ff;                                      /* Modré pozadí */
 }
 
 /* Karta */
@@ -119,9 +119,9 @@ body {
   width: 100%;                                              /* Karta zabírá celou šířku buňky */
   aspect-ratio: 1;                                          /* Karta je vždy čtverec */
   max-width: 100px;                                         /* Maximální velikost */
-  background-color: #ffffff;                              /* Bílé pozadí */
+  background-color: #ffffff;                                /* Bílé pozadí */
   border-radius: 8px;                                       /* Zaoblení rohů */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);               /* Stín pod kartou */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);                 /* Stín pod kartou */
   cursor: pointer;                                          /* Kurzor ruky */
   display: flex;                                            /* Flexbox uvnitř karty */
   justify-content: center;                                  /* Horizontální zarovnání obrázku */
@@ -171,7 +171,7 @@ body {
   left: 0;                                                  /* Zarovnání vlevo */
   width: 100%;                                              /* Překryje celou šířku */
   height: 100%;                                             /* Překryje celou výšku */
-  background: rgba(0, 0, 0, 0.6);                         /* Poloprůhledné tmavé pozadí */
+  background: rgba(0, 0, 0, 0.6);                           /* Poloprůhledné tmavé pozadí */
   display: flex;                                            /* Centrované zarovnání */
   justify-content: center;                                  
   align-items: center;                                      
@@ -180,7 +180,7 @@ body {
 
 /* Okno vítězství */
 .win-box {
-  background: white;                                      /* Bílé okno */
+  background: #ffffff;                                      /* Bílé okno */
   padding: 30px 50px;                                       /* Vnitřní okraje */
   border-radius: 10px;                                      /* Zaoblené rohy */
   text-align: center;                                       /* Text uprostřed */
@@ -207,17 +207,17 @@ body {
   font-size: 15px;                                          /* Velikost textu */
   padding: 6px 14px;                                        /* Vnitřní okraje */
   border-radius: 6px;                                       /* Zaoblené rohy */
-  border: 2px solid #0400ff;                              /* Modrá čára */
-  background: #ffffff;;                                   /* Bílé pozadí */
-  color: #0400ff;                                         /* Modrý text */
+  border: 2px solid #0400ff;                                /* Modrá čára */
+  background: #ffffff;;                                     /* Bílé pozadí */
+  color: #0400ff;                                           /* Modrý text */
   cursor: pointer;                                          /* Kurzor ruky */
   white-space: nowrap;                                      /* Nezalamovat text */
 }
 
 /* Aktivní zvolená obtížnost */
 .difficulty-bar button.active {
-  background: #0400ff;                                    /* Modré pozadí */
-  color: #ffffff;;                                        /* Bílý text */
+  background: #0400ff;                                      /* Modré pozadí */
+  color: #ffffff;;                                          /* Bílý text */
 }
 
 /* Přizpůsobení pro malé obrazovky */
