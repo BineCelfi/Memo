@@ -223,8 +223,10 @@ body {
 /* Přizpůsobení pro malé obrazovky */
 @media (max-width: 480px) {
   body {                                                    /* Měníme stránku pro malá zařízení */
-    padding: 10px;                                          
+    padding: 10px;            
+    min-height: 100vh;                              
     height: auto;                                           
+    justify-content: center;
   }
 
   .stat-bar {                                               /* Zúžíme panel */
