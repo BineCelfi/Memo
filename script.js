@@ -84,7 +84,7 @@ function flipCard() {
 
     flips++;                                                                                    //Zvýšení převratu o 1
     flipsTag.innerText = flips;                                                                 //Závěr o novém významu převratů
-    this.classList.add('flipped');                                                              //Přidání atributu "flipped"
+    this.classList.add('flipped');                                                              //Přidání třídy "flipped"
 
     if (!firstCard) {                                                                           //Pokud je proměnná první karty prázdná
         firstCard = this;                                                                       //Zapsat danou kartu do proměnné první karty
@@ -122,13 +122,13 @@ function unflipCards() {
     lockBoard = true;                                                                           //Zablokovat karty na dobu převratu
 
     setTimeout(() => {                                                                          //Nastavit časovač pro přidání atributu "shake"
-        firstCard.classList.add('shake');                                                       //Přiřazení atributu „shake“ první kartě
-        secondCard.classList.add('shake');                                                      //Přiřazení atributu „shake“ druhé kartě
+        firstCard.classList.add('shake');                                                       //Přiřazení třídy „shake“ první kartě
+        secondCard.classList.add('shake');                                                      //Přiřazení třídy „shake“ druhé kartě
     }, 400);                                                                                    //Časovač na 400 milisekund
 
     setTimeout(() => {                                                                          //Nastavit časovač pro odstranění atributů
-        firstCard.classList.remove('shake', 'flipped');                                         //Odstranit atributy „shake“ a „flipped“ u první karty
-        secondCard.classList.remove('shake', 'flipped');                                        //Odstranit atributy „shake“ a „flipped“ u druhé karty
+        firstCard.classList.remove('shake', 'flipped');                                         //Odstranit třídy „shake“ a „flipped“ u první karty
+        secondCard.classList.remove('shake', 'flipped');                                        //Odstranit třídy „shake“ a „flipped“ u druhé karty
         resetBoard();                                                                           //Návrat do původního stavu před výběrem karet
     }, 1000);                                                                                   //Časovač na 1 sekundu
 }
@@ -186,7 +186,7 @@ function showWinScreen() {
     scoreTag.innerText = score;                                                                 //Zobrazení počtu bodů na obrazovce
     highScoreTag.innerText = highScore;                                                         //Zobrazení maximálního počtu bodů na obrazovce
 
-    document.querySelector(".win-screen").classList.remove("hidden");                           //Odstranit atribut hidden a zobrazí se okno vítězství
+    document.querySelector(".win-screen").classList.remove("hidden");                           //Odstranit třídu "hidden" a zobrazí se okno vítězství
 }
 
 refreshBtn.addEventListener("click", createBoard);                                              //Sledování stisknutí tlačítka nové hry
@@ -198,10 +198,10 @@ refreshBtnWin.addEventListener('click', () => {                                 
 
 document.querySelectorAll(".difficulty-bar button").forEach(btn => {                            //Výběr obtížnosti hry, udělat pro každé tlačítko
     btn.addEventListener("click", () => {                                                       //Sledování stisknutí tlačítka obtížnosti hry a kód provedení po stisknutí
-        document.querySelectorAll(".difficulty-bar button")                                     //Odstranění atributu active u všech tlačítek složitosti
+        document.querySelectorAll(".difficulty-bar button")                                     //Odstranění třídy "active" u všech tlačítek složitosti
             .forEach(b => b.classList.remove("active"));                                        
 
-        btn.classList.add("active");                                                            //Přidání atributu active k stisknutému tlačítku složitosti
+        btn.classList.add("active");                                                            //Přidání třídy "active" k stisknutému tlačítku složitosti
         difficulty = btn.dataset.level;                                                         //Zápis úrovně obtížnosti do globální proměnné
 
         switch (difficulty) {                                                                   //Porovnání úrovně obtížnosti
